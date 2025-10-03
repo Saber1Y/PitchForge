@@ -2,10 +2,13 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession, signOut } from "next-auth/react";
 import { handleGoogleSignIn } from "@/lib/auth-actions";
+import ClientUserAvatar from "@/components/ui/ClientUserAvatar";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -65,39 +68,58 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Auth Buttons */}
+          {/* Auth Section */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Desktop Auth Buttons */}
-            <div className="hidden sm:flex items-center space-x-3">
-              {/* Sign In Button */}
-              <form action={handleGoogleSignIn}>
+            {session ? (
+              // Authenticated User
+              <div className="flex items-center space-x-3">
+                {/* User Avatar & Info */}
+                <ClientUserAvatar />
+
+                {/* Sign Out Button - Desktop */}
                 <button
-                  type="submit"
-                  className="hidden lg:inline-flex items-center px-3 xl:px-4 py-2 border border-pitchforge-gold text-pitchforge-gold rounded-md hover:bg-pitchforge-gold hover:text-pitchforge-bg transition-colors font-medium text-sm xl:text-base"
+                  onClick={() => signOut()}
+                  className="hidden sm:inline-flex items-center px-3 xl:px-4 py-2 border border-pitchforge-gold text-pitchforge-gold rounded-md hover:bg-pitchforge-gold hover:text-pitchforge-bg transition-colors font-medium text-sm xl:text-base"
                 >
-                  Sign In
+                  Sign Out
                 </button>
-              </form>
+              </div>
+            ) : (
+              // Unauthenticated User
+              <>
+                {/* Desktop Auth Buttons */}
+                <div className="hidden sm:flex items-center space-x-3">
+                  {/* Sign In Button */}
+                  <form action={handleGoogleSignIn}>
+                    <button
+                      type="submit"
+                      className="hidden lg:inline-flex items-center px-3 xl:px-4 py-2 border border-pitchforge-gold text-pitchforge-gold rounded-md hover:bg-pitchforge-gold hover:text-pitchforge-bg transition-colors font-medium text-sm xl:text-base"
+                    >
+                      Sign In
+                    </button>
+                  </form>
 
-              {/* Get Started Button */}
-              <Link
-                href="/auth/signup"
-                className="inline-flex items-center px-3 xl:px-4 py-2 bg-pitchforge-mint text-pitchforge-text rounded-md hover:bg-pitchforge-mint/80 transition-colors font-semibold text-sm xl:text-base"
-              >
-                <span className="hidden sm:inline">Get Started</span>
-                <span className="sm:hidden">Start</span>
-              </Link>
-            </div>
+                  {/* Get Started Button */}
+                  <Link
+                    href="/auth/signup"
+                    className="inline-flex items-center px-3 xl:px-4 py-2 bg-pitchforge-mint text-pitchforge-text rounded-md hover:bg-pitchforge-mint/80 transition-colors font-semibold text-sm xl:text-base"
+                  >
+                    <span className="hidden sm:inline">Get Started</span>
+                    <span className="sm:hidden">Start</span>
+                  </Link>
+                </div>
 
-            {/* Mobile Sign In Button */}
-            <form action={handleGoogleSignIn} className="sm:hidden">
-              <button
-                type="submit"
-                className="inline-flex items-center px-2 py-1.5 bg-pitchforge-mint text-pitchforge-text rounded-md hover:bg-pitchforge-mint/80 transition-colors font-medium text-xs"
-              >
-                Sign In
-              </button>
-            </form>
+                {/* Mobile Sign In Button */}
+                <form action={handleGoogleSignIn} className="sm:hidden">
+                  <button
+                    type="submit"
+                    className="inline-flex items-center px-2 py-1.5 bg-pitchforge-mint text-pitchforge-text rounded-md hover:bg-pitchforge-mint/80 transition-colors font-medium text-xs"
+                  >
+                    Sign In
+                  </button>
+                </form>
+              </>
+            )}
 
             {/* Mobile menu button */}
             <button
@@ -170,15 +192,27 @@ const Navbar = () => {
             About
           </Link>
 
-          {/* Mobile Get Started Button */}
+          {/* Mobile Auth Section */}
           <div className="pt-2 border-t border-pitchforge-gold/10">
-            <Link
-              href="/auth/signup"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block w-full text-center px-3 py-3 bg-pitchforge-mint text-pitchforge-text rounded-md hover:bg-pitchforge-mint/80 font-semibold transition-colors"
-            >
-              Get Started
-            </Link>
+            {session ? (
+              <button
+                onClick={() => {
+                  signOut();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-center px-3 py-3 border border-pitchforge-gold text-pitchforge-gold rounded-md hover:bg-pitchforge-gold hover:text-pitchforge-bg font-medium transition-colors"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                href="/auth/signup"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block w-full text-center px-3 py-3 bg-pitchforge-mint text-pitchforge-text rounded-md hover:bg-pitchforge-mint/80 font-semibold transition-colors"
+              >
+                Get Started
+              </Link>
+            )}
           </div>
         </div>
       </div>
