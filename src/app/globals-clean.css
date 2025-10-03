@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+:root {
+  /* PitchForge Color Palette */
+  --pitchforge-background: #f3efe0;
+  --pitchforge-text: #000000;
+  --pitchforge-accent-gold: #cba135;
+  --pitchforge-accent-mint: #7fefbd;
+
+  /* Legacy variables */
+  --background: #f3efe0;
+  --foreground: #000000;
+  
+  /* Font variables */
+  --font-amaranth: 'Amaranth', sans-serif;
+}
+
+/* PitchForge utility classes */
+@layer utilities {
+  .bg-pitchforge-bg {
+    background-color: #f3efe0;
+  }
+  .bg-pitchforge-text {
+    background-color: #000000;
+  }
+  .bg-pitchforge-gold {
+    background-color: #cba135;
+  }
+  .bg-pitchforge-mint {
+    background-color: #7fefbd;
+  }
+
+  .text-pitchforge-bg {
+    color: #f3efe0;
+  }
+  .text-pitchforge-text {
+    color: #000000;
+  }
+  .text-pitchforge-gold {
+    color: #cba135;
+  }
+  .text-pitchforge-mint {
+    color: #7fefbd;
+  }
+
+  .border-pitchforge-gold {
+    border-color: #cba135;
+  }
+  .border-pitchforge-mint {
+    border-color: #7fefbd;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #f3efe0;
+    --foreground: #000000;
+  }
+}
+
+body {
+  background: var(--pitchforge-background);
+  color: var(--pitchforge-text);
+  font-family: var(--font-amaranth), 'Amaranth', sans-serif;
+}

@@ -1,0 +1,154 @@
+import React from "react";
+import Link from "next/link";
+import { BiSearch, BiRocket } from "react-icons/bi";
+import { HiUsers } from "react-icons/hi";
+import { FiTrendingUp } from "react-icons/fi";
+import { AiFillStar } from "react-icons/ai";
+import AnimatedText from "@/components/animations/AnimatedText";
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+
+const Hero = () => {
+  return (
+    <section className="relative min-h-screen bg-gradient-to-br from-pitchforge-bg via-pitchforge-bg to-pitchforge-gold/10 overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-pitchforge-gold animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-20 h-20 rounded-full bg-pitchforge-mint animate-bounce delay-1000"></div>
+        <div className="absolute bottom-32 left-1/4 w-16 h-16 rounded-full bg-pitchforge-gold animate-pulse delay-500"></div>
+        <div className="absolute bottom-20 right-1/3 w-24 h-24 rounded-full bg-pitchforge-mint animate-bounce delay-700"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+        <div className="text-center space-y-2">
+          {/* Badge */}
+          <div className="inline-flex items-center px-4 py-2 bg-pitchforge-mint/20 border border-pitchforge-mint/30 rounded-full">
+            <span className="text-sm font-medium text-pitchforge-text">
+              Where Ideas Become Startups
+            </span>
+          </div>
+
+          {/* Main Headline */}
+          <div className="space-y-4">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-pitchforge-text leading-tight">
+              Pitch Your{" "}
+              <span className="relative">
+                <span className="text-pitchforge-gold">Startup</span>
+                <div className="absolute -bottom-2 left-0 right-0 h-3 bg-pitchforge-mint/30 -rotate-1"></div>
+              </span>
+            </h1>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-pitchforge-text">
+              Connect with{" "}
+              <AnimatedText className="text-2xl sm:text-3xl lg:text-5xl font-bold" />
+            </h2>
+          </div>
+
+          {/* Subtitle */}
+          <p className="max-w-3xl mx-auto text-lg sm:text-xl text-pitchforge-text/80 leading-relaxed">
+            Submit your ideas, vote on pitches, and get noticed in virtual
+            competitions. Join a thriving community of founders, investors, and
+            innovators.
+          </p>
+
+          {/* Search Section */}
+          <div className="max-w-2xl mx-auto">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <BiSearch className="h-5 w-5 text-pitchforge-text/50" />
+              </div>
+              <input
+                type="text"
+                placeholder="Search startups by category, stage, or founder..."
+                className="w-full pl-12 pr-16 py-4 bg-white/90 backdrop-blur-sm border-2 border-pitchforge-gold/20 rounded-2xl text-pitchforge-text placeholder-pitchforge-text/50 focus:outline-none focus:border-pitchforge-gold focus:ring-2 focus:ring-pitchforge-gold/20 transition-all"
+              />
+              <button className="absolute inset-y-0 right-0 flex items-center pr-2">
+                <div className="bg-pitchforge-gold hover:bg-pitchforge-gold/80 text-pitchforge-bg p-3 rounded-xl transition-colors">
+                  <BiSearch className="h-5 w-5" />
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <Link
+              href="/submit"
+              className="group inline-flex items-center px-8 py-4 bg-pitchforge-mint hover:bg-pitchforge-mint/80 text-pitchforge-text font-semibold rounded-2xl transition-all transform hover:scale-105 hover:shadow-lg"
+            >
+              <BiRocket className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+              Submit Your Pitch
+            </Link>
+
+            <Link
+              href="/browse"
+              className="inline-flex items-center px-8 py-4 border-2 border-pitchforge-gold text-pitchforge-gold hover:bg-pitchforge-gold hover:text-pitchforge-bg font-semibold rounded-2xl transition-all"
+            >
+              <HiUsers className="w-5 h-5 mr-2" />
+              Browse Pitches
+            </Link>
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="text-center space-y-2">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-pitchforge-mint/20 rounded-xl">
+              <BiRocket className="w-6 h-6 text-pitchforge-mint" />
+            </div>
+            <div className="text-2xl lg:text-3xl font-bold text-pitchforge-text">
+              500+
+            </div>
+            <div className="text-sm text-pitchforge-text/70">
+              Active Pitches
+            </div>
+          </div>
+
+          <div className="text-center space-y-2">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-pitchforge-gold/20 rounded-xl">
+              <HiUsers className="w-6 h-6 text-pitchforge-gold" />
+            </div>
+            <div className="text-2xl lg:text-3xl font-bold text-pitchforge-text">
+              1.2K+
+            </div>
+            <div className="text-sm text-pitchforge-text/70">Entrepreneurs</div>
+          </div>
+
+          <div className="text-center space-y-2">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-pitchforge-mint/20 rounded-xl">
+              <FiTrendingUp className="w-6 h-6 text-pitchforge-mint" />
+            </div>
+            <div className="text-2xl lg:text-3xl font-bold text-pitchforge-text">
+              $3.5M+
+            </div>
+            <div className="text-sm text-pitchforge-text/70">
+              Funding Raised
+            </div>
+          </div>
+
+          <div className="text-center space-y-2">
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-pitchforge-gold/20 rounded-xl">
+              <AiFillStar className="w-6 h-6 text-pitchforge-gold" />
+            </div>
+            <div className="text-2xl lg:text-3xl font-bold text-pitchforge-text">
+              85+
+            </div>
+            <div className="text-sm text-pitchforge-text/70">
+              Success Stories
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-pitchforge-gold/50 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-pitchforge-gold rounded-full mt-2 animate-pulse"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Wave */}
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white via-white/50 to-transparent"></div>
+    </section>
+  );
+};
+
+export default Hero;

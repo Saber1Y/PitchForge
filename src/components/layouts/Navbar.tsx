@@ -40,9 +40,6 @@ const Navbar = () => {
               <span className="text-lg xs:text-xl sm:text-2xl font-bold text-pitchforge-gold">
                 Forge
               </span>
-              <span className="text-pitchforge-mint text-xs xs:text-sm ml-1">
-                ★
-              </span>
             </div>
           </Link>
 
@@ -87,9 +84,7 @@ const Navbar = () => {
             ) : (
               // Unauthenticated User
               <>
-                {/* Desktop Auth Buttons */}
                 <div className="hidden sm:flex items-center space-x-3">
-                  {/* Sign In Button */}
                   <form action={handleGoogleSignIn}>
                     <button
                       type="submit"
