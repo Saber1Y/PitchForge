@@ -1,6 +1,6 @@
 import React from "react";
 import { BiX } from "react-icons/bi";
-import { FilterState } from "@/app/browse/page";
+import { FilterState } from "@/app/(root)/browse/page";
 
 interface FilterSidebarProps {
   filters: FilterState;

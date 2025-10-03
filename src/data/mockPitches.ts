@@ -1,4 +1,4 @@
-import { PitchData } from "@/app/browse/page";
+import { PitchData } from "@/app/(root)/browse/page";
 
 export const mockPitches: PitchData[] = [
   {
@@ -12,25 +12,26 @@ export const mockPitches: PitchData[] = [
     fundingGoal: 2000000,
     fundingRaised: 500000,
     teamSize: 8,
-    rating: 4.8,
     votes: 342,
     location: "San Francisco, CA",
     founded: "2023",
-    logo: "https://via.placeholder.com/100x100/10B981/FFFFFF?text=E",
+    logo: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=100&h=100&fit=crop&crop=center",
     images: [
-      "https://via.placeholder.com/400x300/10B981/FFFFFF?text=EcoFlow+1",
-      "https://via.placeholder.com/400x300/10B981/FFFFFF?text=EcoFlow+2",
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=300&fit=crop",
     ],
     founders: [
       {
         name: "Sarah Chen",
         role: "CEO & Co-founder",
-        avatar: "https://via.placeholder.com/40x40/10B981/FFFFFF?text=SC",
+        avatar:
+          "https://images.unsplash.com/photo-1494790108755-2616b612b890?w=40&h=40&fit=crop&crop=face",
       },
       {
         name: "Mike Rodriguez",
         role: "CTO & Co-founder",
-        avatar: "https://via.placeholder.com/40x40/10B981/FFFFFF?text=MR",
+        avatar:
+          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
       },
     ],
     tags: ["AI", "Solar", "Energy", "Sustainability"],
@@ -48,20 +49,20 @@ export const mockPitches: PitchData[] = [
     fundingGoal: 5000000,
     fundingRaised: 1200000,
     teamSize: 15,
-    rating: 4.9,
     votes: 567,
     location: "Boston, MA",
     founded: "2022",
-    logo: "https://via.placeholder.com/100x100/EF4444/FFFFFF?text=M",
+    logo: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=100&h=100&fit=crop&crop=center",
     images: [
-      "https://via.placeholder.com/400x300/EF4444/FFFFFF?text=MedAI+1",
-      "https://via.placeholder.com/400x300/EF4444/FFFFFF?text=MedAI+2",
+      "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop",
     ],
     founders: [
       {
         name: "Dr. Emily Watson",
         role: "CEO & Co-founder",
-        avatar: "https://via.placeholder.com/40x40/EF4444/FFFFFF?text=EW",
+        avatar:
+          "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=40&h=40&fit=crop&crop=face",
       },
     ],
     tags: ["AI", "Healthcare", "Diagnostics", "Machine Learning"],
@@ -79,24 +80,25 @@ export const mockPitches: PitchData[] = [
     fundingGoal: 1000000,
     fundingRaised: 150000,
     teamSize: 5,
-    rating: 4.6,
     votes: 234,
     location: "New York, NY",
     founded: "2024",
-    logo: "https://via.placeholder.com/100x100/3B82F6/FFFFFF?text=F",
+    logo: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=100&h=100&fit=crop&crop=center",
     images: [
-      "https://via.placeholder.com/400x300/3B82F6/FFFFFF?text=FinFlow+1",
+      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop",
     ],
     founders: [
       {
         name: "Alex Thompson",
         role: "CEO & Founder",
-        avatar: "https://via.placeholder.com/40x40/3B82F6/FFFFFF?text=AT",
+        avatar:
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
       },
       {
         name: "Jessica Kim",
         role: "Head of Product",
-        avatar: "https://via.placeholder.com/40x40/3B82F6/FFFFFF?text=JK",
+        avatar:
+          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
       },
     ],
     tags: ["Banking", "Cryptocurrency", "Mobile App", "Investing"],
@@ -114,20 +116,20 @@ export const mockPitches: PitchData[] = [
     fundingGoal: 1500000,
     fundingRaised: 300000,
     teamSize: 12,
-    rating: 4.4,
     votes: 189,
     location: "Austin, TX",
     founded: "2023",
-    logo: "https://via.placeholder.com/100x100/F59E0B/FFFFFF?text=FB",
+    logo: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=100&h=100&fit=crop&crop=center",
     images: [
-      "https://via.placeholder.com/400x300/F59E0B/FFFFFF?text=FoodieBot+1",
-      "https://via.placeholder.com/400x300/F59E0B/FFFFFF?text=FoodieBot+2",
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop",
     ],
     founders: [
       {
         name: "Carlos Mendez",
         role: "CEO & Co-founder",
-        avatar: "https://via.placeholder.com/40x40/F59E0B/FFFFFF?text=CM",
+        avatar:
+          "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=40&h=40&fit=crop&crop=face",
       },
     ],
     tags: ["AI", "Restaurant", "Automation", "Analytics"],
@@ -145,26 +147,27 @@ export const mockPitches: PitchData[] = [
     fundingGoal: 8000000,
     fundingRaised: 2500000,
     teamSize: 25,
-    rating: 4.7,
     votes: 445,
     location: "Seattle, WA",
     founded: "2021",
-    logo: "https://via.placeholder.com/100x100/8B5CF6/FFFFFF?text=EV",
+    logo: "https://images.unsplash.com/photo-1592478411213-6153e4ebc696?w=100&h=100&fit=crop&crop=center",
     images: [
-      "https://via.placeholder.com/400x300/8B5CF6/FFFFFF?text=EduVerse+1",
-      "https://via.placeholder.com/400x300/8B5CF6/FFFFFF?text=EduVerse+2",
-      "https://via.placeholder.com/400x300/8B5CF6/FFFFFF?text=EduVerse+3",
+      "https://images.unsplash.com/photo-1592478411213-6153e4ebc696?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1588702547923-7093a5c47145?w=400&h=300&fit=crop",
     ],
     founders: [
       {
         name: "David Park",
         role: "CEO & Co-founder",
-        avatar: "https://via.placeholder.com/40x40/8B5CF6/FFFFFF?text=DP",
+        avatar:
+          "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=40&h=40&fit=crop&crop=face",
       },
       {
         name: "Lisa Chang",
         role: "Head of Content",
-        avatar: "https://via.placeholder.com/40x40/8B5CF6/FFFFFF?text=LC",
+        avatar:
+          "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=40&h=40&fit=crop&crop=face",
       },
     ],
     tags: ["VR", "Education", "3D", "Simulation"],
@@ -182,19 +185,19 @@ export const mockPitches: PitchData[] = [
     fundingGoal: 15000000,
     fundingRaised: 8000000,
     teamSize: 45,
-    rating: 4.5,
     votes: 678,
     location: "Los Angeles, CA",
     founded: "2020",
-    logo: "https://via.placeholder.com/100x100/22C55E/FFFFFF?text=GL",
+    logo: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100&h=100&fit=crop&crop=center",
     images: [
-      "https://via.placeholder.com/400x300/22C55E/FFFFFF?text=GreenLogistics+1",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
     ],
     founders: [
       {
         name: "Maria Santos",
         role: "CEO & Founder",
-        avatar: "https://via.placeholder.com/40x40/22C55E/FFFFFF?text=MS",
+        avatar:
+          "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=40&h=40&fit=crop&crop=face",
       },
     ],
     tags: ["Logistics", "Electric Vehicles", "AI", "Sustainability"],

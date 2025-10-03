@@ -8,7 +8,7 @@ import {
   BiGroup,
   BiCalendar,
 } from "react-icons/bi";
-import { PitchData, ViewMode } from "@/app/browse/page";
+import { PitchData, ViewMode } from "@/app/(root)/browse/page";
 
 interface PitchCardProps {
   pitch: PitchData;

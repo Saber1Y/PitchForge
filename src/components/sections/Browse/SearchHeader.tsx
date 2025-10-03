@@ -1,7 +1,7 @@
 import React from "react";
 import { BiSearch, BiGrid, BiListUl } from "react-icons/bi";
 import { HiAdjustments } from "react-icons/hi";
-import { ViewMode, SortOption } from "@/app/browse/page";
+import { ViewMode, SortOption } from "@/app/(root)/browse/page";
 
 interface SearchHeaderProps {
   searchValue: string;
