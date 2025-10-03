@@ -5,6 +5,7 @@ import { BiSearch } from "react-icons/bi";
 import FilterSidebar from "@/components/sections/Browse/FilterSidebar";
 import PitchCard from "@/components/sections/Browse/PitchCard";
 import SearchHeader from "@/components/sections/Browse/SearchHeader";
+import Loader from "@/components/ui/Loader";
 import { mockPitches } from "@/data/mockPitches";
 
 export type ViewMode = "grid" | "list";
@@ -49,6 +50,10 @@ const BrowsePitchesPage = () => {
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [sortBy, setSortBy] = useState<SortOption>("trending");
   const [showFilters, setShowFilters] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const pitchesPerPage = 4;
+
   const [filters, setFilters] = useState<FilterState>({
     search: "",
     industries: [],
@@ -59,8 +64,8 @@ const BrowsePitchesPage = () => {
     ratingRange: [0, 5],
   });
 
-  // Filter and sort pitches
-  const filteredPitches = useMemo(() => {
+  // Filter and sort all pitches
+  const allFilteredPitches = useMemo(() => {
     const filtered = mockPitches.filter((pitch: PitchData) => {
       // Search filter
       if (filters.search) {
@@ -112,14 +117,6 @@ const BrowsePitchesPage = () => {
         return false;
       }
 
-      // Rating filter
-      if (
-        pitch.rating < filters.ratingRange[0] ||
-        pitch.rating > filters.ratingRange[1]
-      ) {
-        return false;
-      }
-
       return true;
     });
 
@@ -149,8 +146,17 @@ const BrowsePitchesPage = () => {
     return filtered;
   }, [filters, sortBy]);
 
+  // Get pitches to display (paginated)
+  const displayedPitches = useMemo(() => {
+    return allFilteredPitches.slice(0, currentPage * pitchesPerPage);
+  }, [allFilteredPitches, currentPage, pitchesPerPage]);
+
+  // Check if there are more pitches to load
+  const hasMorePitches = displayedPitches.length < allFilteredPitches.length;
+
   const handleFilterChange = (newFilters: Partial<FilterState>) => {
     setFilters((prev) => ({ ...prev, ...newFilters }));
+    setCurrentPage(1); // Reset to first page when filters change
   };
 
   const clearFilters = () => {
@@ -163,11 +169,20 @@ const BrowsePitchesPage = () => {
       teamSizeRange: [1, 100],
       ratingRange: [0, 5],
     });
+    setCurrentPage(1); // Reset to first page when filters are cleared
+  };
+
+  const handleLoadMore = async () => {
+    setIsLoading(true);
+    // Simulate loading delay (optional)
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    setCurrentPage((prev) => prev + 1);
+    setIsLoading(false);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pitchforge-bg via-pitchforge-bg to-pitchforge-gold/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <SearchHeader
           searchValue={filters.search}
@@ -178,7 +193,7 @@ const BrowsePitchesPage = () => {
           onViewModeChange={setViewMode}
           showFilters={showFilters}
           onToggleFilters={() => setShowFilters(!showFilters)}
-          resultsCount={filteredPitches.length}
+          resultsCount={allFilteredPitches.length}
         />
 
         <div className="flex gap-8 mt-8">
@@ -218,8 +233,8 @@ const BrowsePitchesPage = () => {
           )}
 
           {/* Main Content */}
-          <div className="flex-1">
-            {filteredPitches.length === 0 ? (
+          <div className="flex-1 space-y-4">
+            {displayedPitches.length === 0 ? (
               // Empty State
               <div className="text-center py-16">
                 <div className="w-24 h-24 bg-pitchforge-gold/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -244,20 +259,33 @@ const BrowsePitchesPage = () => {
                 className={
                   viewMode === "grid"
                     ? "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-                    : "space-y-4"
+                    : "space-y-4 flex flex-col"
                 }
               >
-                {filteredPitches.map((pitch: PitchData) => (
+                {displayedPitches.map((pitch: PitchData) => (
                   <PitchCard key={pitch.id} pitch={pitch} viewMode={viewMode} />
                 ))}
               </div>
             )}
 
             {/* Load More Button */}
-            {filteredPitches.length > 0 && (
-              <div className="text-center mt-12">
-                <button className="px-8 py-4 bg-pitchforge-mint hover:bg-pitchforge-mint/80 text-pitchforge-text font-semibold rounded-xl transition-all transform hover:scale-105">
-                  Load More Pitches
+            {hasMorePitches && (
+              <div className="flex justify-center mt-12">
+                <button
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-pitchforge-mint hover:bg-pitchforge-mint/80 text-pitchforge-text font-semibold rounded-xl transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  onClick={handleLoadMore}
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="w-5 h-5 flex items-center justify-center">
+                        <Loader className="scale-[0.35]" />
+                      </div>
+                      <span>Loading...</span>
+                    </>
+                  ) : (
+                    "Load More Pitches"
+                  )}
                 </button>
               </div>
             )}
