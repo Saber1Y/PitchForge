@@ -11,7 +11,7 @@ const Hero = () => {
   return (
     <section className="relative">
       <BackgroundBeamsWithCollision>
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 z-20">
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 z-20">
           <div className="text-center space-y-8">
             {/* Badge */}
             <div className="inline-flex items-center px-4 py-2 bg-pitchforge-mint/20 border border-pitchforge-mint/30 rounded-full">
@@ -44,7 +44,7 @@ const Hero = () => {
             </p>
 
             {/* Search Section */}
-            <div className="max-w-2xl mx-auto pt-4">
+            {/* <div className="max-w-2xl mx-auto pt-4">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <BiSearch className="h-5 w-5 text-pitchforge-text/50" />
@@ -60,7 +60,7 @@ const Hero = () => {
                   </div>
                 </button>
               </div>
-            </div>
+            </div> */}
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { BiRocket, BiHeart } from "react-icons/bi";
+import {  BiHeart } from "react-icons/bi";
 import {
   FaTwitter,
   FaLinkedin,
