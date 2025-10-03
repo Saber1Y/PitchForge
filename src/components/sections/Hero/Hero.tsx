@@ -11,7 +11,7 @@ const Hero = () => {
   return (
     <section className="relative">
       <BackgroundBeamsWithCollision>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 z-20">
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 z-20">
           <div className="text-center space-y-8">
             {/* Badge */}
             <div className="inline-flex items-center px-4 py-2 bg-pitchforge-mint/20 border border-pitchforge-mint/30 rounded-full">
