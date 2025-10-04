@@ -1,11 +1,10 @@
 import React from "react";
-import { BiSearch, BiGrid, BiListUl } from "react-icons/bi";
+import { BiGrid, BiListUl } from "react-icons/bi";
 import { HiAdjustments } from "react-icons/hi";
 import { ViewMode, SortOption } from "@/app/(root)/browse/page";
+import SearchForm from "@/components/Forms/SearchForm/SearchForm";
 
 interface SearchHeaderProps {
-  searchValue: string;
-  onSearchChange: (value: string) => void;
   sortBy: SortOption;
   onSortChange: (sort: SortOption) => void;
   viewMode: ViewMode;
@@ -13,11 +12,11 @@ interface SearchHeaderProps {
   showFilters: boolean;
   onToggleFilters: () => void;
   resultsCount: number;
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 const SearchHeader: React.FC<SearchHeaderProps> = ({
-  searchValue,
-  onSearchChange,
+  searchParams,
   sortBy,
   onSortChange,
   viewMode,
@@ -33,6 +32,14 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({
     { value: "funding" as SortOption, label: "Highest Funding" },
   ];
 
+  const queryValue = searchParams?.query;
+  const query =
+    typeof queryValue === "string"
+      ? queryValue
+      : Array.isArray(queryValue)
+      ? queryValue.join(" ")
+      : "";
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -47,26 +54,7 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({
         </p>
       </div>
 
-      {/* Search Bar */}
-      <div className="max-w-3xl mx-auto">
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <BiSearch className="h-5 w-5 text-pitchforge-text/50" />
-          </div>
-          <input
-            type="text"
-            value={searchValue}
-            onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search startups by name, industry, or tags..."
-            className="w-full pl-12 pr-16 py-4 bg-white/90 backdrop-blur-sm border-2 border-pitchforge-gold/20 rounded-2xl text-pitchforge-text placeholder-pitchforge-text/50 focus:outline-none focus:border-pitchforge-gold focus:ring-2 focus:ring-pitchforge-gold/20 transition-all"
-          />
-          <button className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-auto">
-            <div className="bg-pitchforge-gold hover:bg-pitchforge-gold/80 text-pitchforge-bg p-3 rounded-xl transition-colors transform hover:scale-105">
-              <BiSearch className="h-5 w-5" />
-            </div>
-          </button>
-        </div>
-      </div>
+      <SearchForm query={query} />
 
       {/* Controls Bar */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/50 backdrop-blur-sm rounded-2xl p-4">
