@@ -14,6 +14,7 @@ interface PitchCardProps {
   pitch: PitchData;
   viewMode: ViewMode;
 }
+ 
 
 const PitchCard: React.FC<PitchCardProps> = ({ pitch, viewMode }) => {
   const [isBookmarked, setIsBookmarked] = useState(pitch.isBookmarked);
@@ -254,7 +255,7 @@ const PitchCard: React.FC<PitchCardProps> = ({ pitch, viewMode }) => {
           {/* Founders */}
           <div className="flex items-center justify-between">
             <div className="flex -space-x-2">
-              {pitch.founders.slice(0, 3).map((founder, index) => (
+              {pitch.founders.slice(0, 3).map((founder: { avatar: string; name: string; role: string }, index: number) => (
                 <Image
                   key={index}
                   src={founder.avatar}
