@@ -1,24 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Amaranth } from "next/font/google";
+import { Sora } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/providers/AuthProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sora = Sora({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  style: ["normal"],
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const amaranth = Amaranth({
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  variable: "--font-amaranth",
+  variable: "--font-sora",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -34,9 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${amaranth.variable} ${geistSans.variable} ${geistMono.variable} font-amaranth antialiased`}
-      >
+      <body className={`${sora.variable} font-sora antialiased`}>
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
