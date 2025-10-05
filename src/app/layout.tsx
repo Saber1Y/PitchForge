@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Sora } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/providers/AuthProvider";
+import 'easymde/dist/easymde.min.css';
 
 const sora = Sora({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
