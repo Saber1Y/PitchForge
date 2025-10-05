@@ -1,0 +1,25 @@
+export const STARTUPS_QUERY = `*[_type == "startup"] | order(_createdAt desc) {
+  _id,
+  slug,
+  companyName,
+  tagline,
+  description,
+  stage,
+  fundingGoal,
+  fundingRaised,
+  teamSize,
+  votes,
+  location,
+  founded,
+  logo,
+  images,
+  founders,
+  tags,
+  isBookmarked,
+  createdAt,
+  views,
+  category,
+  image,
+  pitch
+}
+`;

@@ -8,39 +8,74 @@ export const startup = defineType({
     defineField({
       name: "slug",
       type: "slug",
-      options: {
-        source: "title",
-      },
+      options: { source: "companyName" },
     }),
     defineField({
-      name: "title",
-      type: "reference",
-      to: { type: "author" },
+      name: "companyName",
+      type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "views",
+      name: "description",
+      type: "text",
+    }),
+    defineField({
+      name: "stage",
+      type: "string",
+    }),
+    defineField({
+      name: "fundingGoal",
       type: "number",
     }),
     defineField({
-      name: "category",
+      name: "fundingRaised",
+      type: "number",
+    }),
+    defineField({
+      name: "teamSize",
+      type: "number",
+    }),
+    defineField({
+      name: "votes",
+      type: "number",
+    }),
+    defineField({
+      name: "location",
       type: "string",
-      validation: (Rule) =>
-        Rule.min(2)
-          .max(15)
-          .required()
-          .error(
-            "Category is required and must be between 2 and 15 characters"
-          ),
     }),
     defineField({
-      name: "image",
+      name: "founded",
+      type: "string",
+    }),
+    defineField({
+      name: "logo",
       type: "url",
-      validation: (Rule) =>
-        Rule.required().error("A valid image URL is required"),
     }),
     defineField({
-      name: "pitch",
-      type: "markdown",
+      name: "images",
+      type: "array",
+      of: [{ type: "url" }],
     }),
+    defineField({
+      name: "founders",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "name", type: "string" }),
+            defineField({ name: "role", type: "string" }),
+            defineField({ name: "avatar", type: "url" }),
+          ],
+        },
+      ],
+    }),
+    defineField({ name: "tags", type: "array", of: [{ type: "string" }] }),
+    defineField({ name: "isBookmarked", type: "boolean" }),
+    defineField({ name: "createdAt", type: "datetime" }),
+    defineField({ name: "views", type: "number" }),
+    defineField({ name: "category", type: "string" }),
+    defineField({ name: "image", type: "url" }),
+    defineField({ name: "pitch", type: "markdown" }),
   ],
 });

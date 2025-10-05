@@ -7,12 +7,16 @@ import PitchCard from "@/components/sections/Browse/PitchCard";
 import SearchHeader from "@/components/sections/Browse/SearchHeader";
 import Loader from "@/components/ui/Loader";
 import { mockPitches } from "@/data/mockPitches";
+// import { client } from "@/sanity/lib/client";
+// import { STARTUPS_QUERY } from "@/lib/queries";
+import { post } from "@/data/QueriedData";
 
 export type ViewMode = "grid" | "list";
 export type SortOption = "trending" | "recent" | "votes" | "funding";
 
 export interface PitchData {
   id: string;
+  _id?: string;
   companyName: string;
   tagline: string;
   description: string;
@@ -64,9 +68,18 @@ const BrowsePitchesPage = () => {
     ratingRange: [0, 5],
   });
 
+  //fetch query from sanity
+
+  // const post = await client.fetch(STARTUPS_QUERY);
+  // console.log(post);
+
+  {
+    console.log(post);
+  }
+
   // Filter and sort all pitches
   const allFilteredPitches = useMemo(() => {
-    const filtered = mockPitches.filter((pitch: PitchData) => {
+    const filtered = post.filter((pitch: PitchData) => {
       // Search filter
       if (filters.search) {
         const searchTerm = filters.search.toLowerCase();
@@ -263,7 +276,11 @@ const BrowsePitchesPage = () => {
                 }
               >
                 {displayedPitches.map((pitch: PitchData) => (
-                  <PitchCard key={pitch.id} pitch={pitch} viewMode={viewMode} />
+                  <PitchCard
+                    key={pitch.id || pitch._id}
+                    pitch={pitch}
+                    viewMode={viewMode}
+                  />
                 ))}
               </div>
             )}
