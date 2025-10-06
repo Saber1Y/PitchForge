@@ -14,7 +14,6 @@ interface PitchCardProps {
   pitch: PitchData;
   viewMode: ViewMode;
 }
- 
 
 const PitchCard: React.FC<PitchCardProps> = ({ pitch, viewMode }) => {
   const [isBookmarked, setIsBookmarked] = useState(pitch.isBookmarked);
@@ -47,7 +46,7 @@ const PitchCard: React.FC<PitchCardProps> = ({ pitch, viewMode }) => {
 
   if (viewMode === "list") {
     return (
-      <Link href={`/pitch/${pitch.id}`}>
+      <Link href={`/startup/${pitch.slug.current}`}>
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border border-pitchforge-gold/10">
           <div className="flex items-start gap-6">
             {/* Logo */}
@@ -154,7 +153,7 @@ const PitchCard: React.FC<PitchCardProps> = ({ pitch, viewMode }) => {
 
   // Grid view
   return (
-    <Link href={`/pitch/${pitch.id}`}>
+    <Link href={`/startup/${pitch.slug.current}`}>
       <div className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border border-pitchforge-gold/10 group">
         {/* Image */}
         <div className="relative h-48 bg-gradient-to-br from-pitchforge-gold/20 to-pitchforge-mint/20">
@@ -255,17 +254,24 @@ const PitchCard: React.FC<PitchCardProps> = ({ pitch, viewMode }) => {
           {/* Founders */}
           <div className="flex items-center justify-between">
             <div className="flex -space-x-2">
-              {pitch.founders.slice(0, 3).map((founder: { avatar: string; name: string; role: string }, index: number) => (
-                <Image
-                  key={index}
-                  src={founder.avatar}
-                  alt={founder.name}
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 rounded-full border-2 border-white"
-                  title={`${founder.name} - ${founder.role}`}
-                />
-              ))}
+              {pitch.founders
+                .slice(0, 3)
+                .map(
+                  (
+                    founder: { avatar: string; name: string; role: string },
+                    index: number
+                  ) => (
+                    <Image
+                      key={index}
+                      src={founder.avatar}
+                      alt={founder.name}
+                      width={32}
+                      height={32}
+                      className="w-8 h-8 rounded-full border-2 border-white"
+                      title={`${founder.name} - ${founder.role}`}
+                    />
+                  )
+                )}
               {pitch.founders.length > 3 && (
                 <div className="w-8 h-8 rounded-full bg-pitchforge-gold/20 border-2 border-white flex items-center justify-center">
                   <span className="text-xs font-medium text-pitchforge-text">
