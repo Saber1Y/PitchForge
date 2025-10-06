@@ -1,4 +1,13 @@
-export const STARTUPS_QUERY = `*[_type == "startup"] | order(_createdAt desc) {
+export const STARTUPS_QUERY = `*[
+  _type == "startup" &&
+  (
+    !defined($search) ||
+    companyName match $search ||
+    tagline match $search ||
+    category == $search ||
+    author->name match $search
+  )
+] | order(_createdAt desc) {
   _id,
   slug,
   companyName,

@@ -8,7 +8,12 @@ const SearchForm = ({ query }: { query: string }) => {
 
   return (
     <div className="max-w-3xl mx-auto">
-      <Form action={"/"} scroll={false} className="search-form">
+      <Form
+        action={"/browse"}
+        scroll={false}
+        className="search-form"
+        formMethod="get"
+      >
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <BiSearch className="h-5 w-5 text-pitchforge-text/50" />

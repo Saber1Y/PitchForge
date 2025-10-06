@@ -1,4 +1,4 @@
-import { client } from "@/sanity/lib/client";
+// import { client } from "@/sanity/lib/client";
 import { STARTUPS_QUERY } from "@/lib/queries";
 import { sanityFetch } from "@/sanity/lib/live";
 
