@@ -64,7 +64,7 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
               <Link
-                href="/submit"
+                href="/create"
                 className="group inline-flex items-center px-8 py-4 bg-pitchforge-mint hover:bg-pitchforge-mint/80 text-pitchforge-text font-semibold rounded-2xl transition-all transform hover:scale-105 hover:shadow-lg"
               >
                 <BiRocket className="w-5 h-5 mr-2 group-hover:animate-bounce" />
