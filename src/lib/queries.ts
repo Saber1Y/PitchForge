@@ -1,3 +1,5 @@
+import { defineQuery } from "next-sanity";
+
 export const STARTUPS_QUERY = `*[
   _type == "startup" &&
   (
@@ -61,3 +63,10 @@ export const STARTUP_BY_SLUG_QUERY = `*[
   pitch
 }
 `;
+
+export const STARTUP_BY_VIEWS_QUERY = defineQuery(`*[
+  _type == "startup" && _id == $id {
+   _id,
+    views
+  }
+  ]`);

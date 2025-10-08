@@ -12,6 +12,7 @@ import {
   BiDollarCircle,
   BiBarChart,
 } from "react-icons/bi";
+import ViewsWidget from "@/components/sections/views/ViewsWidget";
 
 interface Founder {
   name: string;
@@ -272,6 +273,7 @@ export default async function StartupPage({ params }: StartupPageProps) {
           </div>
         </div>
       </div>
+      <ViewsWidget slug={startup.slug.current} />
       <SanityLive />
     </>
   );
