@@ -64,9 +64,8 @@ export const STARTUP_BY_SLUG_QUERY = `*[
 }
 `;
 
-export const STARTUP_BY_VIEWS_QUERY = defineQuery(`*[
-  _type == "startup" && _id == $id {
-   _id,
+export const STARTUP_BY_VIEWS_QUERY = `
+  *[_type == "startup" && slug.current == $slug][0] {
     views
   }
-  ]`);
+`;
