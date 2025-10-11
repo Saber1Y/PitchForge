@@ -1,4 +1,4 @@
-import { defineQuery } from "next-sanity";
+// import { defineQuery } from "next-sanity";
 
 export const STARTUPS_QUERY = `*[
   _type == "startup" &&

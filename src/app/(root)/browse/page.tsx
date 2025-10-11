@@ -8,7 +8,7 @@ export default async function BrowsePage({
 }: {
   searchParams?: { [key: string]: string };
 }) {
-  const query = searchParams?.query || "";
+  const query = (await searchParams?.query) || "";
   const params = { search: query || null };
   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
 

@@ -25,9 +25,10 @@ interface StartupPageProps {
 }
 
 export default async function StartupPage({ params }: StartupPageProps) {
+  const { slug } = await params;
   const { data: startup } = await sanityFetch({
     query: STARTUP_BY_SLUG_QUERY,
-    params: { slug: params.slug },
+    params: { slug },
   });
 
   if (!startup) {
@@ -273,7 +274,7 @@ export default async function StartupPage({ params }: StartupPageProps) {
           </div>
         </div>
       </div>
-      <ViewsWidget slug={startup.slug.current} />
+      {/* <ViewsWidget slug={startup.slug.current} /> */}
       <SanityLive />
     </>
   );
