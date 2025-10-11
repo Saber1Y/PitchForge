@@ -69,3 +69,13 @@ export const STARTUP_BY_VIEWS_QUERY = `
     views
   }
 `;
+
+export const STARTUP_BY_GOOGLE_AUTH = `
+ *[_type == "author" && id == $id][0] {
+   _id,
+   name,
+   bio,
+   image,
+   email
+ }
+`;
