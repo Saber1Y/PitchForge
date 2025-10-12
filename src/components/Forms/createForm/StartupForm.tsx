@@ -24,7 +24,7 @@ const StartupForm = () => {
     resolver: zodResolver(StartupSchema) as unknown as Resolver<FormValues>,
   });
 
-  const stepFields = stepFieldsMap[step] ?? [];
+  // const stepFields = stepFieldsMap[step] ?? [];
 
   const nextStep = async () => {
     const valid = await trigger(stepFieldsMap[step]);
@@ -79,6 +79,7 @@ const StartupForm = () => {
               <input
                 type="text"
                 {...register("companyName")}
+                placeholder="e.g. PitchForge Inc."
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.companyName && (
@@ -94,6 +95,7 @@ const StartupForm = () => {
               <input
                 type="text"
                 {...register("tagline")}
+                placeholder="e.g. The fastest way to pitch your startup"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.tagline && (
@@ -109,6 +111,7 @@ const StartupForm = () => {
               <textarea
                 {...register("description")}
                 rows={4}
+                placeholder="Describe your startup, mission, and vision..."
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.description && (
@@ -124,6 +127,7 @@ const StartupForm = () => {
               <input
                 type="text"
                 {...register("stage")}
+                placeholder="e.g. Seed, Series A, MVP, Idea"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.stage && (
@@ -144,6 +148,7 @@ const StartupForm = () => {
               <input
                 type="number"
                 {...register("teamSize")}
+                placeholder="e.g. 5"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.teamSize && (
@@ -159,6 +164,7 @@ const StartupForm = () => {
               <input
                 type="text"
                 {...register("location")}
+                placeholder="e.g. San Francisco, CA"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.location && (
@@ -174,6 +180,7 @@ const StartupForm = () => {
               <input
                 type="text"
                 {...register("founded")}
+                placeholder="e.g. 2023"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.founded && (
@@ -189,6 +196,7 @@ const StartupForm = () => {
               <input
                 type="text"
                 {...register("founders")}
+                placeholder="e.g. Jane Doe, John Smith"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.founders && (
@@ -209,6 +217,7 @@ const StartupForm = () => {
               <input
                 type="number"
                 {...register("fundingGoal")}
+                placeholder="e.g. 1000000"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.fundingGoal && (
@@ -224,6 +233,7 @@ const StartupForm = () => {
               <input
                 type="number"
                 {...register("fundingRaised")}
+                placeholder="e.g. 250000"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.fundingRaised && (
@@ -244,6 +254,7 @@ const StartupForm = () => {
               <input
                 type="url"
                 {...register("logo")}
+                placeholder="e.g. https://yourdomain.com/logo.png"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.logo && (
@@ -259,6 +270,7 @@ const StartupForm = () => {
               <input
                 type="text"
                 {...register("images")}
+                placeholder="e.g. https://img1.jpg, https://img2.jpg"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.images && (
@@ -279,6 +291,7 @@ const StartupForm = () => {
               <input
                 type="text"
                 {...register("tags")}
+                placeholder="e.g. SaaS, AI, Fintech"
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.tags && (
@@ -294,6 +307,7 @@ const StartupForm = () => {
               <textarea
                 {...register("pitch")}
                 rows={4}
+                placeholder="Write your pitch in markdown..."
                 className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
               />
               {formState.errors.pitch && (
