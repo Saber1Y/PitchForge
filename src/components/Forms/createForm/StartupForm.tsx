@@ -1,9 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import { useForm, type Resolver } from "react-hook-form";
+import React, { useState, useEffect } from "react";
+import {
+  useForm,
+  type Resolver,
+  Controller,
+  useFieldArray,
+  type Path,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { StartupSchema } from "@/schemas/StartupSchema";
 import { z } from "zod";
+import MDEditor from "@uiw/react-md-editor";
+import { useRouter } from "next/navigation";
 
 type FormValues = z.infer<typeof StartupSchema>;
 
@@ -11,17 +19,47 @@ const steps = ["Basic Info", "Team", "Funding", "Media", "Pitch"];
 
 // Map each step to its relevant field names
 const stepFieldsMap: Array<Array<keyof FormValues>> = [
-  ["companyName", "tagline", "description", "stage"],
+  ["companyName", "description", "stage"],
   ["teamSize", "location", "founded", "founders"],
   ["fundingGoal", "fundingRaised"],
   ["logo", "images"],
   ["tags", "pitch"],
 ];
 
+const LOCAL_STORAGE_KEY = "pitchforge-startupFormData";
+
 const StartupForm = () => {
   const [step, setStep] = useState(0);
-  const { register, handleSubmit, formState, trigger } = useForm<FormValues>({
-    resolver: zodResolver(StartupSchema) as unknown as Resolver<FormValues>,
+  const { register, handleSubmit, formState, trigger, control, watch, reset } =
+    useForm<FormValues>({
+      resolver: zodResolver(StartupSchema) as unknown as Resolver<FormValues>,
+    });
+
+  useEffect(() => {
+    const subscription = watch((values) => {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(values));
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (saved) {
+      reset(JSON.parse(saved));
+    }
+  }, [reset]);
+
+  const { fields, append, remove } = useFieldArray<FormValues, "founders">({
+    control,
+    name: "founders",
+  });
+  const {
+    fields: imageFields,
+    append: appendImage,
+    remove: removeImage,
+  } = useFieldArray<FormValues, "images">({
+    control,
+    name: "images",
   });
 
   // const stepFields = stepFieldsMap[step] ?? [];
@@ -32,8 +70,31 @@ const StartupForm = () => {
   };
   const prevStep = () => setStep((s) => Math.max(s - 1, 0));
 
-  const onSubmit = (data: FormValues) => {
+  const router = useRouter();
+
+  const onSubmit = async (data: FormValues) => {
     alert("Submitted!" + JSON.stringify(data, null, 2));
+
+    try {
+      const response = await fetch("/api/createStartup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+
+      if (response.ok) {
+        router.push(`/startups/${result.slug.current}`);
+      } else {
+        alert("Error: " + result.error);
+      }
+
+      return result;
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
 
     console.log(data);
   };
@@ -85,22 +146,6 @@ const StartupForm = () => {
               {formState.errors.companyName && (
                 <span className="text-red-500 text-xs mt-1 block">
                   {formState.errors.companyName.message}
-                </span>
-              )}
-            </div>
-            <div>
-              <label className="block font-semibold mb-2 text-pitchforge-text">
-                Tagline
-              </label>
-              <input
-                type="text"
-                {...register("tagline")}
-                placeholder="e.g. The fastest way to pitch your startup"
-                className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
-              />
-              {formState.errors.tagline && (
-                <span className="text-red-500 text-xs mt-1 block">
-                  {formState.errors.tagline.message}
                 </span>
               )}
             </div>
@@ -191,19 +236,66 @@ const StartupForm = () => {
             </div>
             <div>
               <label className="block font-semibold mb-2 text-pitchforge-text">
-                Founders (comma separated names)
+                Founders
               </label>
-              <input
-                type="text"
-                {...register("founders")}
-                placeholder="e.g. Jane Doe, John Smith"
-                className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
-              />
-              {formState.errors.founders && (
-                <span className="text-red-500 text-xs mt-1 block">
-                  {formState.errors.founders.message}
-                </span>
-              )}
+              {/* Dynamic founders array */}
+              {fields.map((field, idx) => (
+                <div
+                  key={field.id}
+                  className="mb-4 p-4 rounded-xl bg-gray-50 border border-pitchforge-mint/10"
+                >
+                  <input
+                    {...register(`founders.${idx}.name`)}
+                    placeholder="Name"
+                    className="mb-2 w-full p-2 rounded-lg border border-pitchforge-mint/30"
+                  />
+                  {formState.errors.founders?.[idx]?.name && (
+                    <span className="text-red-500 text-xs block">
+                      {formState.errors.founders[idx].name.message}
+                    </span>
+                  )}
+                  <input
+                    {...register(`founders.${idx}.role`)}
+                    placeholder="Role"
+                    className="mb-2 w-full p-2 rounded-lg border border-pitchforge-mint/30"
+                  />
+                  {formState.errors.founders?.[idx]?.role && (
+                    <span className="text-red-500 text-xs block">
+                      {formState.errors.founders[idx].role.message}
+                    </span>
+                  )}
+                  <input
+                    {...register(`founders.${idx}.avatar`)}
+                    placeholder="Avatar URL"
+                    className="mb-2 w-full p-2 rounded-lg border border-pitchforge-mint/30"
+                  />
+                  {formState.errors.founders?.[idx]?.avatar && (
+                    <span className="text-red-500 text-xs block">
+                      {formState.errors.founders[idx].avatar.message}
+                    </span>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => remove(idx)}
+                    className="text-xs text-red-500 mt-2"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => append({ name: "", role: "", avatar: "" })}
+                className="px-4 py-2 rounded-lg bg-pitchforge-mint text-pitchforge-text font-semibold mt-2"
+              >
+                Add Founder
+              </button>
+              {formState.errors.founders &&
+                typeof formState.errors.founders.message === "string" && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {formState.errors.founders.message}
+                  </span>
+                )}
             </div>
           </>
         )}
@@ -265,50 +357,68 @@ const StartupForm = () => {
             </div>
             <div>
               <label className="block font-semibold mb-2 text-pitchforge-text">
-                Images URLs (comma separated)
+                Images
               </label>
-              <input
-                type="text"
-                {...register("images")}
-                placeholder="e.g. https://img1.jpg, https://img2.jpg"
-                className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
-              />
-              {formState.errors.images && (
-                <span className="text-red-500 text-xs mt-1 block">
-                  {formState.errors.images.message}
-                </span>
-              )}
+              {/* Dynamic images array */}
+              {imageFields.map((field, idx) => (
+                <div
+                  key={field.id}
+                  className="mb-4 p-4 rounded-xl bg-gray-50 border border-pitchforge-mint/10"
+                >
+                  <input
+                    {...register(`images.${idx}`)}
+                    placeholder="Image URL"
+                    className="mb-2 w-full p-2 rounded-lg border border-pitchforge-mint/30"
+                  />
+                  {formState.errors.images?.[idx] && (
+                    <span className="text-red-500 text-xs block">
+                      {formState.errors.images[idx].message}
+                    </span>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => removeImage(idx)}
+                    className="text-xs text-red-500 mt-2"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => appendImage("")}
+                className="px-4 py-2 rounded-lg bg-pitchforge-mint text-pitchforge-text font-semibold mt-2"
+              >
+                Add Image
+              </button>
+              {formState.errors.images &&
+                typeof formState.errors.images.message === "string" && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {formState.errors.images.message}
+                  </span>
+                )}
             </div>
           </>
         )}
         {step === 4 && (
           <>
-            {/* Pitch & Tags */}
-            <div>
-              <label className="block font-semibold mb-2 text-pitchforge-text">
-                Tags (comma separated)
-              </label>
-              <input
-                type="text"
-                {...register("tags")}
-                placeholder="e.g. SaaS, AI, Fintech"
-                className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
-              />
-              {formState.errors.tags && (
-                <span className="text-red-500 text-xs mt-1 block">
-                  {formState.errors.tags.message}
-                </span>
-              )}
-            </div>
+            {/* Pitch */}
             <div>
               <label className="block font-semibold mb-2 text-pitchforge-text">
                 Pitch (markdown)
               </label>
-              <textarea
-                {...register("pitch")}
-                rows={4}
-                placeholder="Write your pitch in markdown..."
-                className="w-full p-3 rounded-xl border border-pitchforge-mint/30 focus:border-pitchforge-mint focus:ring-2 focus:ring-pitchforge-mint/30 transition outline-none bg-white/90 shadow-sm"
+              <Controller
+                name="pitch"
+                control={control}
+                render={({ field }) => (
+                  <MDEditor
+                    value={field.value}
+                    onChange={field.onChange}
+                    preview="edit"
+                    height={250}
+                    className="bg-white rounded-xl border border-pitchforge-mint/30 shadow-sm"
+                  />
+                )}
               />
               {formState.errors.pitch && (
                 <span className="text-red-500 text-xs mt-1 block">

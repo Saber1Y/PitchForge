@@ -13,27 +13,33 @@ export const startup = defineType({
     defineField({
       name: "companyName",
       type: "string",
+      title: "Company Name",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "description",
       type: "text",
+      title: "Description",
     }),
     defineField({
       name: "stage",
       type: "string",
+      title: "Stage",
     }),
     defineField({
       name: "fundingGoal",
       type: "number",
+      title: "Funding Goal",
     }),
     defineField({
       name: "fundingRaised",
       type: "number",
+      title: "Funding Raised",
     }),
     defineField({
       name: "teamSize",
       type: "number",
+      title: "Team Size",
     }),
     defineField({
       name: "votes",
@@ -42,23 +48,28 @@ export const startup = defineType({
     defineField({
       name: "location",
       type: "string",
+      title: "Location",
     }),
     defineField({
       name: "founded",
       type: "string",
+      title: "Founded",
     }),
     defineField({
       name: "logo",
       type: "url",
+      title: "Logo",
     }),
     defineField({
       name: "images",
       type: "array",
+      title: "Images",
       of: [{ type: "url" }],
     }),
     defineField({
       name: "founders",
       type: "array",
+      title: "Founders",
       of: [
         {
           type: "object",
@@ -70,12 +81,11 @@ export const startup = defineType({
         },
       ],
     }),
-    defineField({ name: "tags", type: "array", of: [{ type: "string" }] }),
     defineField({ name: "isBookmarked", type: "boolean" }),
     defineField({ name: "createdAt", type: "datetime" }),
     defineField({ name: "views", type: "number" }),
     defineField({ name: "category", type: "string" }),
     defineField({ name: "image", type: "url" }),
-    defineField({ name: "pitch", type: "markdown" }),
+    defineField({ name: "pitch", type: "markdown", title: "Pitch" }),
   ],
 });

@@ -78,9 +78,6 @@ const PitchCard: React.FC<PitchCardProps> = ({ pitch, viewMode }) => {
                     </div>
                   </div>
 
-                  <p className="text-pitchforge-text/80 font-medium mb-2">
-                    {pitch.tagline}
-                  </p>
                   <p className="text-pitchforge-text/60 text-sm line-clamp-2 mb-4">
                     {pitch.description}
                   </p>
@@ -199,9 +196,6 @@ const PitchCard: React.FC<PitchCardProps> = ({ pitch, viewMode }) => {
               <h3 className="text-lg font-semibold text-pitchforge-text truncate mb-1">
                 {pitch.companyName}
               </h3>
-              <p className="text-pitchforge-text/80 text-sm font-medium line-clamp-1">
-                {pitch.tagline}
-              </p>
             </div>
           </div>
 

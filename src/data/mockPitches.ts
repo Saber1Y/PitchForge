@@ -1,10 +1,31 @@
-import { PitchData } from "@/app/(root)/browse/page";
+export interface PitchData {
+  id: string;
+  _id?: string;
+  companyName: string;
+  description: string;
+  industry: string;
+  stage: string;
+  fundingGoal: number;
+  fundingRaised: number;
+  teamSize: number;
+  votes: number;
+  location: string;
+  founded: string;
+  logo: string;
+  images: string[];
+  founders: {
+    name: string;
+    role: string;
+    avatar: string;
+  }[];
+  isBookmarked: boolean;
+  createdAt: string;
+}
 
 export const mockPitches: PitchData[] = [
   {
     id: "1",
     companyName: "EcoFlow",
-    tagline: "Sustainable energy solutions for modern homes",
     description:
       "Revolutionary solar panel technology that increases efficiency by 40% while reducing costs. Our AI-powered energy management system optimizes power consumption and storage.",
     industry: "CleanTech",
@@ -34,14 +55,12 @@ export const mockPitches: PitchData[] = [
           "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face",
       },
     ],
-    tags: ["AI", "Solar", "Energy", "Sustainability"],
     isBookmarked: false,
     createdAt: "2024-10-01T10:00:00Z",
   },
   {
     id: "2",
     companyName: "MedAI",
-    tagline: "AI-powered diagnostic tools for healthcare",
     description:
       "Advanced machine learning algorithms that can detect diseases from medical imaging with 99% accuracy. Reducing diagnosis time from hours to minutes.",
     industry: "HealthTech",
@@ -65,14 +84,12 @@ export const mockPitches: PitchData[] = [
           "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=40&h=40&fit=crop&crop=face",
       },
     ],
-    tags: ["AI", "Healthcare", "Diagnostics", "Machine Learning"],
     isBookmarked: true,
     createdAt: "2024-09-28T14:30:00Z",
   },
   {
     id: "3",
     companyName: "FinFlow",
-    tagline: "Digital banking for the next generation",
     description:
       "Comprehensive financial platform with smart budgeting, automated investing, and cryptocurrency integration. Built for millennials and Gen Z.",
     industry: "FinTech",
@@ -101,14 +118,12 @@ export const mockPitches: PitchData[] = [
           "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
       },
     ],
-    tags: ["Banking", "Cryptocurrency", "Mobile App", "Investing"],
     isBookmarked: false,
     createdAt: "2024-10-02T09:15:00Z",
   },
   {
     id: "4",
     companyName: "FoodieBot",
-    tagline: "AI-powered restaurant management system",
     description:
       "Complete restaurant automation platform with AI-driven inventory management, customer service chatbots, and predictive analytics for demand forecasting.",
     industry: "FoodTech",
@@ -132,14 +147,12 @@ export const mockPitches: PitchData[] = [
           "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=40&h=40&fit=crop&crop=face",
       },
     ],
-    tags: ["AI", "Restaurant", "Automation", "Analytics"],
     isBookmarked: true,
     createdAt: "2024-09-25T16:45:00Z",
   },
   {
     id: "5",
     companyName: "EduVerse",
-    tagline: "Virtual reality learning experiences",
     description:
       "Immersive VR educational platform that makes learning engaging and interactive. Covering subjects from history to quantum physics with 3D simulations.",
     industry: "EdTech",
@@ -170,14 +183,12 @@ export const mockPitches: PitchData[] = [
           "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=40&h=40&fit=crop&crop=face",
       },
     ],
-    tags: ["VR", "Education", "3D", "Simulation"],
     isBookmarked: false,
     createdAt: "2024-09-30T11:20:00Z",
   },
   {
     id: "6",
     companyName: "GreenLogistics",
-    tagline: "Carbon-neutral delivery solutions",
     description:
       "Revolutionary logistics platform using electric vehicles and AI-optimized routes to provide 100% carbon-neutral delivery services for e-commerce.",
     industry: "Logistics",
@@ -200,7 +211,6 @@ export const mockPitches: PitchData[] = [
           "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=40&h=40&fit=crop&crop=face",
       },
     ],
-    tags: ["Logistics", "Electric Vehicles", "AI", "Sustainability"],
     isBookmarked: true,
     createdAt: "2024-09-22T13:10:00Z",
   },

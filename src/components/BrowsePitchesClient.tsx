@@ -14,7 +14,6 @@ export interface PitchData {
   id: string;
   _id?: string;
   companyName: string;
-  tagline: string;
   description: string;
   industry: string;
   stage: string;
@@ -31,7 +30,6 @@ export interface PitchData {
     role: string;
     avatar: string;
   }[];
-  tags: string[];
   isBookmarked: boolean;
   createdAt: string;
 }
@@ -76,11 +74,7 @@ const BrowsePitchesClient = ({ posts }: BrowsePitchesClientProps) => {
         const searchTerm = filters.search.toLowerCase();
         const matchesSearch =
           pitch.companyName.toLowerCase().includes(searchTerm) ||
-          pitch.tagline.toLowerCase().includes(searchTerm) ||
-          pitch.description.toLowerCase().includes(searchTerm) ||
-          pitch.tags.some((tag: string) =>
-            tag.toLowerCase().includes(searchTerm)
-          );
+          pitch.description.toLowerCase().includes(searchTerm);
         if (!matchesSearch) return false;
       }
 
@@ -189,8 +183,7 @@ const BrowsePitchesClient = ({ posts }: BrowsePitchesClientProps) => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <SearchHeader
-          searchValue={filters.search}
-          onSearchChange={(search: string) => handleFilterChange({ search })}
+          searchParams={{ query: filters.search }}
           sortBy={sortBy}
           onSortChange={setSortBy}
           viewMode={viewMode}

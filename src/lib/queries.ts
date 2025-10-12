@@ -5,7 +5,6 @@ export const STARTUPS_QUERY = `*[
   (
     !defined($search) ||
     companyName match $search ||
-    tagline match $search ||
     category == $search ||
     author->name match $search
   )
@@ -13,7 +12,6 @@ export const STARTUPS_QUERY = `*[
   _id,
   slug,
   companyName,
-  tagline,
   description,
   stage,
   fundingGoal,
@@ -25,7 +23,6 @@ export const STARTUPS_QUERY = `*[
   logo,
   images,
   founders,
-  tags,
   isBookmarked,
   createdAt,
   views,
@@ -42,7 +39,6 @@ export const STARTUP_BY_SLUG_QUERY = `*[
   _id,
   slug,
   companyName,
-  tagline,
   description,
   stage,
   fundingGoal,
@@ -54,7 +50,6 @@ export const STARTUP_BY_SLUG_QUERY = `*[
   logo,
   images,
   founders,
-  tags,
   isBookmarked,
   createdAt,
   views,
