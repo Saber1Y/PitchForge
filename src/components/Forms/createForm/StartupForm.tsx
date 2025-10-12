@@ -12,6 +12,7 @@ import { StartupSchema } from "@/schemas/StartupSchema";
 import { z } from "zod";
 import MDEditor from "@uiw/react-md-editor";
 import { useRouter } from "next/navigation";
+import slugify from "slugify";
 
 type FormValues = z.infer<typeof StartupSchema>;
 
@@ -23,7 +24,7 @@ const stepFieldsMap: Array<Array<keyof FormValues>> = [
   ["teamSize", "location", "founded", "founders"],
   ["fundingGoal", "fundingRaised"],
   ["logo", "images"],
-  ["tags", "pitch"],
+  ["pitch"],
 ];
 
 const LOCAL_STORAGE_KEY = "pitchforge-startupFormData";
@@ -72,31 +73,24 @@ const StartupForm = () => {
 
   const router = useRouter();
 
-  const onSubmit = async (data: FormValues) => {
-    alert("Submitted!" + JSON.stringify(data, null, 2));
+  const onSubmit = async (data: any) => {
+    // Generate slug from companyName
+    const slug = slugify(data.companyName, { lower: true, strict: true });
+    const payload = { ...data, slug: { current: slug } };
 
-    try {
-      const response = await fetch("/api/createStartup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const result = await response.json();
+    const response = await fetch("/api/createStartup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const result = await response.json();
 
-      if (response.ok) {
-        router.push(`/startups/${result.slug.current}`);
-      } else {
-        alert("Error: " + result.error);
-      }
-
-      return result;
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    if (response.ok && result.slug && result.slug.current) {
+      router.push(`/startup/${result.slug.current}`);
+    } else {
+      alert("Error: " + (result.error || "Missing slug in response"));
+      console.error("Error creating startup:", result.error || result);
     }
-
-    console.log(data);
   };
 
   return (
