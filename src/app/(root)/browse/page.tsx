@@ -1,15 +1,17 @@
 import BrowsePitchesClient from "@/components/BrowsePitchesClient";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { STARTUPS_QUERY } from "@/lib/queries";
-// import { getSearchParams } from "next/navigation";
 
+// @ts-expect-error Next.js inferred wrong type for searchParams
 export default async function BrowsePage({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string };
+  searchParams?: Record<string, string | string[] | undefined>;
 }) {
-  const query = searchParams?.query || "";
+  const query =
+    typeof searchParams?.query === "string" ? searchParams.query : "";
   const params = { search: query || null };
+
   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
 
   return (

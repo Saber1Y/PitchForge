@@ -5,7 +5,6 @@ import {
   type Resolver,
   Controller,
   useFieldArray,
-  type Path,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { StartupSchema } from "@/schemas/StartupSchema";
@@ -73,7 +72,7 @@ const StartupForm = () => {
 
   const router = useRouter();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: FormValues) => {
     // Generate slug from companyName
     const slug = slugify(data.companyName, { lower: true, strict: true });
     const payload = { ...data, slug: { current: slug } };

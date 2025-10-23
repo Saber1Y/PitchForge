@@ -217,7 +217,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🗺️ Roadmap
 
-- [ ] Mobile app (React Native)
 - [ ] Advanced analytics dashboard
 - [ ] Integration with popular dev tools
 - [ ] AI-powered pitch analysis

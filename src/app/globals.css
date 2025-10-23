@@ -78,8 +78,8 @@ body {
 .loader {
   width: 70px;
   aspect-ratio: 1;
-  background: radial-gradient(farthest-side, #cba135 90%, #0000) center/16px
-      16px,
+  background:
+    radial-gradient(farthest-side, #cba135 90%, #0000) center/16px 16px,
     radial-gradient(farthest-side, #10b981 90%, #0000) bottom/12px 12px;
   background-repeat: no-repeat;
   animation: l17 1s infinite linear;

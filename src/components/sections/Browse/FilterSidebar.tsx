@@ -1,5 +1,4 @@
 import React from "react";
-import { BiX } from "react-icons/bi";
 import { FilterState } from "@/app/(root)/browse/page";
 
 interface FilterSidebarProps {
@@ -44,22 +43,22 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   ];
 
   const handleIndustryChange = (industry: string) => {
-    const newIndustries = filters.industries.includes(industry)
-      ? filters.industries.filter((i) => i !== industry)
+    const newIndustries: string[] = filters.industries.includes(industry)
+      ? filters.industries.filter((i: string) => i !== industry)
       : [...filters.industries, industry];
     onFilterChange({ industries: newIndustries });
   };
 
   const handleStageChange = (stage: string) => {
-    const newStages = filters.stages.includes(stage)
-      ? filters.stages.filter((s) => s !== stage)
+    const newStages: string[] = filters.stages.includes(stage)
+      ? filters.stages.filter((s: string) => s !== stage)
       : [...filters.stages, stage];
     onFilterChange({ stages: newStages });
   };
 
   const handleLocationChange = (location: string) => {
-    const newLocations = filters.locations.includes(location)
-      ? filters.locations.filter((l) => l !== location)
+    const newLocations: string[] = filters.locations.includes(location)
+      ? filters.locations.filter((l: string) => l !== location)
       : [...filters.locations, location];
     onFilterChange({ locations: newLocations });
   };

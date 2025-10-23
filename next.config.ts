@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { fa } from "zod/v4/locales";
 
 const nextConfig: NextConfig = {
   images: {
@@ -47,6 +48,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {},
 };
 
 export default nextConfig;
