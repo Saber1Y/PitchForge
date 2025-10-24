@@ -8,7 +8,7 @@ import {
   BiGroup,
   BiCalendar,
 } from "react-icons/bi";
-import { PitchData, ViewMode } from "@/app/browse/page";
+import type { PitchData, ViewMode } from "@/types/Pitch";
 
 interface PitchCardProps {
   pitch: PitchData;
@@ -46,7 +46,13 @@ const PitchCard: React.FC<PitchCardProps> = ({ pitch, viewMode }) => {
 
   if (viewMode === "list") {
     return (
-      <Link href={`/startup/${pitch.slug?.current || pitch.slug || pitch.id}`}>
+      <Link
+        href={`/startup/${
+          typeof pitch.slug === "object" && pitch.slug !== null
+            ? pitch.slug.current
+            : pitch.slug || pitch.id
+        }`}
+      >
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border border-pitchforge-gold/10">
           <div className="flex items-start gap-6">
             {/* Logo */}
@@ -150,7 +156,13 @@ const PitchCard: React.FC<PitchCardProps> = ({ pitch, viewMode }) => {
 
   // Grid view
   return (
-    <Link href={`/startup/${pitch.slug?.current || pitch.slug || pitch.id}`}>
+    <Link
+      href={`/startup/${
+        typeof pitch.slug === "object" && pitch.slug !== null
+          ? pitch.slug.current
+          : pitch.slug || pitch.id
+      }`}
+    >
       <div className="bg-white/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border border-pitchforge-gold/10 group">
         {/* Image */}
         <div className="relative h-48 bg-gradient-to-br from-pitchforge-gold/20 to-pitchforge-mint/20">

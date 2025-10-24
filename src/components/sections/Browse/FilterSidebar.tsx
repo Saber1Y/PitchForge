@@ -1,5 +1,5 @@
 import React from "react";
-import { FilterState } from "@/app/(root)/browse/page";
+import type { FilterState } from "@/types/FilterState";
 
 interface FilterSidebarProps {
   filters: FilterState;

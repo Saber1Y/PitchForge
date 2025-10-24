@@ -44,26 +44,24 @@ export const StartupSchema = z.object({
     },
     { message: "Logo must be a reachable image URL" }
   ),
-  images: z
-    .array(z.string())
-    .min(1, "At least one image URL is required")
-    .refine(
-      async (urls) => {
-        for (const url of urls) {
-          try {
-            const response = await fetch(url, { method: "HEAD" });
-            const contentType = response.headers.get("Content-Type");
-            if (!(contentType && contentType.startsWith("image/"))) {
-              return false;
-            }
-          } catch (error) {
-            console.error("Error validating image URL:", error);
-            return false;
-          }
-        }
-        return true;
-      },
-      { message: "All images must be reachable image URLs" }
-    ),
+  images: z.array(z.string()).min(1, "At least one image URL is required"),
+  // .refine(
+  //   async (urls) => {
+  //     for (const url of urls) {
+  //       try {
+  //         const response = await fetch(url, { method: "HEAD" });
+  //         const contentType = response.headers.get("Content-Type");
+  //         if (!(contentType && contentType.startsWith("image/"))) {
+  //           return false;
+  //         }
+  //       } catch (error) {
+  //         console.error("Error validating image URL:", error);
+  //         return false;
+  //       }
+  //     }
+  //     return true;
+  //   },
+  //   { message: "All images must be reachable image URLs" }
+  // ),
   pitch: z.string().min(10, "Pitch must be at least 10 characters long"),
 });

@@ -49,17 +49,19 @@ const StartupForm = () => {
     }
   }, [reset]);
 
-  const { fields, append, remove } = useFieldArray<FormValues, "founders">({
+  const { fields, append, remove } = useFieldArray<FormValues>({
     control,
     name: "founders",
   });
+
   const {
     fields: imageFields,
     append: appendImage,
     remove: removeImage,
-  } = useFieldArray<FormValues, "images">({
+  } = useFieldArray({
     control,
-    name: "images",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    name: "images" as any,
   });
 
   // const stepFields = stepFieldsMap[step] ?? [];
@@ -379,7 +381,7 @@ const StartupForm = () => {
               ))}
               <button
                 type="button"
-                onClick={() => appendImage("")}
+                onClick={() => appendImage({ images: [""] })}
                 className="px-4 py-2 rounded-lg bg-pitchforge-mint text-pitchforge-text font-semibold mt-2"
               >
                 Add Image

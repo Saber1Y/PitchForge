@@ -20,11 +20,12 @@ interface Founder {
 }
 
 interface StartupPageProps {
-  params: { slug: string };
+  params?: Promise<{ slug: string }> | undefined;
 }
 
 export default async function StartupPage({ params }: StartupPageProps) {
-  const { slug } = await params;
+  const resolvedParams = (params ? await params : {}) as { slug: string };
+  const { slug } = resolvedParams;
   const { data: startup } = await sanityFetch({
     query: STARTUP_BY_SLUG_QUERY,
     params: { slug },
